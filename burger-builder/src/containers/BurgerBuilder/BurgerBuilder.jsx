@@ -26,11 +26,16 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 2,
     purchasable: false,
+    purchesing: false,
   }
 
   updatePurchaseState (ingredients) {
     const sum = Object.values(ingredients).reduce((sum, x) => sum + x)
     this.setState({ purchasable: sum > 0 })
+  }
+
+  purcheseHandler = () => {
+    this.setState({purchesing: true})
   }
 
   addIngredientHandler = (type) => {
@@ -75,7 +80,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal>
+        <Modal show={ this.state.purchesing }>
           <OrderSummary ingredients={ this.state.ingredients }/>
         </Modal>
         <Burger ingredient={ this.state.ingredients }/>
@@ -84,6 +89,7 @@ class BurgerBuilder extends Component {
           ingredientRemove={ this.removeIngredientHandler }
           disabled={ disabledInfo }
           purchasable={ this.state.purchasable }
+          ordered={ this.purcheseHandler }
           price={ this.state.totalPrice } />
       </Aux>
     )
