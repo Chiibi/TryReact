@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Aux from '../../hoc/auxiliary'
+import Aux from '../../hoc/Auxiliary'
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import Modal from '../../components/UI/Modal/Modal'
@@ -36,6 +36,10 @@ class BurgerBuilder extends Component {
 
   purcheseHandler = () => {
     this.setState({purchesing: true})
+  }
+
+  purcheseCancleHandler = () => {
+    this.setState({purchesing: false})
   }
 
   addIngredientHandler = (type) => {
@@ -80,7 +84,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal show={ this.state.purchesing }>
+        <Modal show={ this.state.purchesing } modalClosed={ this.purcheseCancleHandler }>
           <OrderSummary ingredients={ this.state.ingredients }/>
         </Modal>
         <Burger ingredient={ this.state.ingredients }/>
